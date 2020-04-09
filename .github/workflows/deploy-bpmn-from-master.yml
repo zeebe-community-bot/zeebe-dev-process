@@ -1,0 +1,21 @@
+name: Deploy Workflows
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/main/ressources/bpmn/*'
+
+jobs:
+  deploy-workflows:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Updated Workflows
+        uses: jwulf/zeebe-action@master
+        with:
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          operation: deployWorkflow
+          bpmn_directory: src/main/ressources/bpmn
