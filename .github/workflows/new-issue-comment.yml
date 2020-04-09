@@ -8,6 +8,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    if: ${{ github.event.comment.user.id }} != 63413175
     steps:
       - uses: actions/checkout@v2
       
