@@ -24,4 +24,4 @@ jobs:
           messageName: closed
           correlationKey: ${{ github.event.issue.number }}
           variables: '{"issue": ${{ toJson(github.event.issue) }} }'
-
+          timeToLive: Duration.minutes.of(10)
