@@ -19,3 +19,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run a one-line script
       run: echo github.event.action ${{ github.event }}
+  
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
