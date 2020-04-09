@@ -58,6 +58,9 @@
     <bpmn:serviceTask id="Task_08syn5r" name="check issue">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="user" />
+        <zeebe:ioMapping>
+          <zeebe:input source="issue.url" target="issue" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_02pvntt</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_12isuxi</bpmn:incoming>
@@ -92,10 +95,28 @@
       <bpmn:outgoing>SequenceFlow_1abpsy1</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1f4qas6" sourceRef="IntermediateThrowEvent_0eq9148" targetRef="Task_1c4inms" />
+    <bpmn:subProcess id="SubProcess_0v6b9bw" triggeredByEvent="true">
+      <bpmn:startEvent id="StartEvent_1vglsev" isInterrupting="false">
+        <bpmn:outgoing>SequenceFlow_00q07qw</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_02uanoy" messageRef="Message_1gbum3t" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_00q07qw" sourceRef="StartEvent_1vglsev" targetRef="Task_1mwyav9" />
+      <bpmn:serviceTask id="Task_1mwyav9" name="check comment">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="user" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_00q07qw</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_1i5w19s</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="EndEvent_1ajlgxb">
+        <bpmn:incoming>SequenceFlow_1i5w19s</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_1i5w19s" sourceRef="Task_1mwyav9" targetRef="EndEvent_1ajlgxb" />
+    </bpmn:subProcess>
   </bpmn:process>
   <bpmn:message id="Message_1gbum3t" name="new comment">
     <bpmn:extensionElements>
-      <zeebe:subscription correlationKey="issueKey" />
+      <zeebe:subscription correlationKey="issue.number" />
     </bpmn:extensionElements>
   </bpmn:message>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -223,6 +244,26 @@
         <di:waypoint x="310" y="486" />
         <di:waypoint x="310" y="610" />
         <di:waypoint x="400" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SubProcess_13gszlj_di" bpmnElement="SubProcess_0v6b9bw" isExpanded="true">
+        <dc:Bounds x="115" y="690" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1aomlws_di" bpmnElement="StartEvent_1vglsev">
+        <dc:Bounds x="155" y="772" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00q07qw_di" bpmnElement="SequenceFlow_00q07qw">
+        <di:waypoint x="191" y="790" />
+        <di:waypoint x="250" y="790" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_122cn7o_di" bpmnElement="Task_1mwyav9">
+        <dc:Bounds x="250" y="750" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1ajlgxb_di" bpmnElement="EndEvent_1ajlgxb">
+        <dc:Bounds x="412" y="772" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1i5w19s_di" bpmnElement="SequenceFlow_1i5w19s">
+        <di:waypoint x="350" y="790" />
+        <di:waypoint x="412" y="790" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
