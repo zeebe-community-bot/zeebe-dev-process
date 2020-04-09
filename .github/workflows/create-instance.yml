@@ -1,8 +1,11 @@
-name: Create-Instance
+name: Test Action
 
 on:
   issues:
     types: [opened]
+  issue_comment:
+    types: [created]
+    
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
