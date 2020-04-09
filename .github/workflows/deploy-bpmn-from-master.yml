@@ -15,9 +15,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Deploy Updated Workflows
         uses: jwulf/zeebe-action@master
-        env: 
-          ZEEBE_ADDRESS: ${{ secrets.ZEEBE_ADDRESS }}
+        #env: 
+        #  ZEEBE_ADDRESS: ${{ secrets.ZEEBE_ADDRESS }}
         with:
-          #client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
           bpmn_directory: src/main/resources/bpmn
