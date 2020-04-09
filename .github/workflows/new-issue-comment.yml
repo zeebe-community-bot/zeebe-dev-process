@@ -23,4 +23,4 @@ jobs:
           operation: publishMessage
           messageName: new comment
           correlationKey: ${{ github.event.issue.number }}
-          variables: '{"comment": ${{ toJson(github.event.comment) }} }'
+          variables: '{"comment": ${{ toJson(github.event.comment) }}, "issue": ${{ toJson(github.event.issue) }} }'
