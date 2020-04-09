@@ -76,7 +76,7 @@
       <bpmn:incoming>SequenceFlow_0zo44q2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1svaemv</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0oyzbo2" name="...">
+    <bpmn:serviceTask id="Task_0oyzbo2" name="...?">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="unknown" />
       </bpmn:extensionElements>
