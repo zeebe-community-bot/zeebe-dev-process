@@ -1,4 +1,4 @@
-name: Create Community Workflow Instance 
+name: New Issue Opened
 
 on:
   issues:
