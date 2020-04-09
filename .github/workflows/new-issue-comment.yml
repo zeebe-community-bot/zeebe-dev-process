@@ -24,3 +24,4 @@ jobs:
           messageName: new comment
           correlationKey: ${{ github.event.issue.number }}
           variables: '{"comment": ${{ toJson(github.event.comment) }}, "issue": ${{ toJson(github.event.issue) }} }'
+          timeToLive: Duration.minutes.of(10)
