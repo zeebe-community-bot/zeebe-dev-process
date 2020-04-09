@@ -84,7 +84,7 @@
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="CAMUNDA-HTTP" />
         <zeebe:taskHeaders>
-          <zeebe:header key="url" value="{{issue.url}}//comments" />
+          <zeebe:header key="url" value="{{issue.url}}/comments" />
           <zeebe:header key="method" value="POST" />
           <zeebe:header key="authorization" value="Bearer {{github_token}}" />
           <zeebe:header key="body" value="{&#34;body&#34;:&#34;This issue seems to be inactive, please comment if this issue is still considered useful or the issue will be closed.&#34;}" />
