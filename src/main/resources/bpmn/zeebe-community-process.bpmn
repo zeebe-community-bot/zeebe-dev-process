@@ -9,11 +9,11 @@
       <bpmn:outgoing>SequenceFlow_0248xfc</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1yvmcvr</bpmn:outgoing>
     </bpmn:eventBasedGateway>
-    <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_0p3csaw" name="1 minute">
+    <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_0p3csaw" name="3 minute">
       <bpmn:incoming>SequenceFlow_0248xfc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1kxtyek</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0b6gc1b">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT3M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0248xfc" sourceRef="ExclusiveGateway_1vtenir" targetRef="IntermediateCatchEvent_0p3csaw" />
@@ -51,7 +51,13 @@
     <bpmn:sequenceFlow id="SequenceFlow_09mpflv" sourceRef="IntermediateCatchEvent_1fgbosz" targetRef="ExclusiveGateway_079m885" />
     <bpmn:serviceTask id="Task_14o5g1n" name="close issue">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="close-issue" />
+        <zeebe:taskDefinition type="CAMUNDA-HTTP" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="url" value="{{issue.url}}" />
+          <zeebe:header key="method" value="PATCH" />
+          <zeebe:header key="authorization" value="Bearer {{github_token}}" />
+          <zeebe:header key="body" value="{&#34;state&#34;:&#34;closed&#34;}" />
+        </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1kxtyek</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1abpsy1</bpmn:outgoing>
