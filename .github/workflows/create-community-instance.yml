@@ -1,0 +1,25 @@
+name: Create Community Workflow Instance 
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      
+      - name: Create Zeebe Workflow
+        uses: jwulf/zeebe-action@master
+        with:
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          operation: createWorkflowInstance
+          bpmnProcessId: zeebe-community-process
+          variables: '{"issue": "${{ github.event.issue }}" }'
