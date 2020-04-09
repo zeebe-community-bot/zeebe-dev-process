@@ -22,4 +22,4 @@ jobs:
           clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: createWorkflowInstance
           bpmnProcessId: zeebe-community-process
-          variables: '{"issue": "${{ github.event.issue }}" }'
+          variables: '{"issue": ${{ toJson(github.event.issue) }} }'
